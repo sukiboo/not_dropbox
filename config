@@ -1,0 +1,7 @@
+export SSHPASS_PATH='/usr/local/bin/sshpass'
+export RSYNC_PATH='/usr/bin/rsync'
+export SERVER_DIR='path_to_sync_dir_server'
+export CLIENT_DIR='path_to_sync_dir_client'
+export CLIENT_IP='127.0.0.1'
+export CLIENT_PASS='PleaseDontHackMe'
+
