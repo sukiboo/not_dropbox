@@ -4,7 +4,7 @@
 source ./config
 
 # pull from client
-RSYNC_PULL_FLAGS="-cavu --exclude='.*'"
+RSYNC_PULL_FLAGS="-cavu --exclude=.*"
 $SSHPASS_PATH -p $CLIENT_PASS $RSYNC_PATH $RSYNC_PULL_FLAGS $CLIENT_IP:$CLIENT_DIR $SERVER_DIR
 
 # remove files marked for deletion: 'file~.ext' -> 'file.ext' -> delete
@@ -22,7 +22,7 @@ do
         # if the file has an extension, remove 'file~.ext' and 'file.ext'
         if [[ "$filename" == *.* ]]
         then
-            filename_without_last_tilde="${filename%~*}.${filename#*.}"
+            filename_without_last_tilde="${filename%~*}.${filename##*.}"
             if [ -e "$filename_without_last_tilde" ]
             then
                 rm "$filename" "$filename_without_last_tilde"
@@ -34,7 +34,7 @@ do
 
         # if the file does not have extension, remove 'file~' and 'file'
         else
-            filename_without_last_underscore="${filename%~*}"
+            filename_without_last_tilde="${filename%~*}"
             if [ -e "$filename_without_last_tilde" ]
             then
                 rm -r "$filename" "$filename_without_last_tilde"
@@ -50,6 +50,6 @@ done
 IFS=$' \t\n'
 
 # push to client and delete files that are not on server
-RSYNC_PUSH_FLAGS="-cavu --delete --exclude='.*'"
+RSYNC_PUSH_FLAGS="-cavu --delete --exclude=.*"
 $SSHPASS_PATH -p $CLIENT_PASS $RSYNC_PATH $RSYNC_PUSH_FLAGS $SERVER_DIR $CLIENT_IP:$CLIENT_DIR
 
