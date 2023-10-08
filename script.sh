@@ -4,7 +4,7 @@
 source ./config
 
 # pull from client
-RSYNC_PULL_FLAGS="-cavu --exclude '.*'"
+RSYNC_PULL_FLAGS="-cavu --exclude='.*'"
 $SSHPASS_PATH -p $CLIENT_PASS $RSYNC_PATH $RSYNC_PULL_FLAGS $CLIENT_IP:$CLIENT_DIR $SERVER_DIR
 
 # remove files marked for deletion: 'file~.ext' -> 'file.ext' -> delete
@@ -47,8 +47,9 @@ do
 
     fi
 done
+IFS=$' \t\n'
 
 # push to client and delete files that are not on server
-RSYNC_PUSH_FLAGS="-cavu --exclude '.*' --delete"
+RSYNC_PUSH_FLAGS="-cavu --delete --exclude='.*'"
 $SSHPASS_PATH -p $CLIENT_PASS $RSYNC_PATH $RSYNC_PUSH_FLAGS $SERVER_DIR $CLIENT_IP:$CLIENT_DIR
 
