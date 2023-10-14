@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# create timestamp
+echo $(date)
+
 # read the config file
 source ./config
 
