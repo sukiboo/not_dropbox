@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# create timestamp
-echo $(date)
+# print timestamp
+echo $'\n\n'$(date)
 
 # read the config file
 source ./config
